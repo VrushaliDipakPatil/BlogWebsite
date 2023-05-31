@@ -7,6 +7,7 @@ import blogPosts from "../blogdata";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
+  const[unique, setUnique]=useState(true)
   const [authorName, setAuthorName] = useState("");
   const [topic, setTopic] = useState("");
   const [content, setContent] = useState("");
@@ -17,9 +18,25 @@ const CreateBlog = () => {
   const blogPost = localStorage.getItem('blogPosts')
   const parsedItem = JSON.parse(blogPost) || [];
 
+ const istitleUnique=(inputTitle)=>{
+  parsedItem
+  .filter((post) => {
+  if (
+      post.title.toLowerCase().includes(inputTitle.toLowerCase()) 
+    ){
+      toast.error("Blog Title must be Unique")
+     setUnique(false);
+    }else{
+      setUnique(false);
+    }
+  })
+ }
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    istitleUnique(title)
 
+    if(unique == true){
     const submittedData =
       {
         id: blogPosts.length + 1,
@@ -35,7 +52,12 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
   parsedItem.push(submittedData)
   localStorage.setItem('blogPosts', JSON.stringify(parsedItem))
   toast.success(`${submittedData.title} is added Successfully`);
-}
+  setTitle('')
+  setAuthorName('')
+  setTopic('')
+  setContent('')
+  setImage('')
+}}
 
   };
 
@@ -54,7 +76,7 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
         pauseOnHover
         theme="dark"
       />
-      <div className="create-blog">
+      <div className="create-blog" >
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
