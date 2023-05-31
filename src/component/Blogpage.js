@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Blogpage.css";
 import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
-import blogPosts from "../blogdata";
 
 const Blogpage = () => {
   const navigate = useNavigate();
