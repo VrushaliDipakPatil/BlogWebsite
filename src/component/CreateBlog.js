@@ -13,6 +13,21 @@ const CreateBlog = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
 
+  const [blog, setBlog] = useState({
+    title: "",
+    authorName: "",
+    topic: "",
+    backgroundImage: "",
+    content:" "
+  });
+
+  let name, value;
+  const HandleAddBlog = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+
+    setBlog({ ...blog, [name]: value });
+  }
 
   const defaultImg = "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg"
 
@@ -35,17 +50,17 @@ const CreateBlog = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    istitleUnique(title)
+    istitleUnique(blog.title)
 
     if(unique === true){
     const submittedData =
       {
-        id: parsedItem.id + 1 || 1,
-        title: title,
-        authorName: authorName,
-        topic: topic,
-        content: content,
-        backgroundImage: image || defaultImg,
+        id: parsedItem.length + 1 ,
+        title: blog.title,
+        authorName: blog.authorName,
+        topic: blog.topic,
+        content: blog.content,
+        backgroundImage: blog.backgroundImage || defaultImg,
       } 
 if(submittedData.title === "" || submittedData.authorName === "" || submittedData.topic === "" || submittedData.content === " "){
   toast.error("Please fill Required fields!!")
@@ -53,11 +68,13 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
   parsedItem.push(submittedData)
   localStorage.setItem('blogPosts', JSON.stringify(parsedItem))
   toast.success(`${submittedData.title} is added Successfully`);
-  setTitle('')
-  setAuthorName('')
-  setTopic('')
-  setContent('')
-  setImage('')
+  setBlog({
+    title: "",
+    authorName: "",
+    topic: "",
+    backgroundImage: "",
+    content:" "
+  })
 }}
 
   };
@@ -87,17 +104,19 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
             <input
               type="text"
               id="title"
-              value={ title}
-              onChange={(e) => setTitle(e.target.value)}
+              name="title"
+              value={ blog.title}
+              onChange={HandleAddBlog}
             />
           </div>
           <div className="form-group">
             <label htmlFor="authorName">* Author Name:</label>
             <input
               type="text"
+              name="authorName"
               id="authorName"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
+              value={blog.authorName}
+              onChange={HandleAddBlog}
             />
           </div>
           <div className="form-group">
@@ -105,8 +124,9 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
             <input
               type="text"
               id="topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
+              name="topic"
+              value={blog.topic}
+              onChange={HandleAddBlog}
             />
           </div>
           <div className="form-group">
@@ -114,16 +134,18 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
             <input
               type="text"
               id="image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
+              name="backgroundImage"
+              value={blog.backgroundImage}
+              onChange={HandleAddBlog}
             />
           </div>
           <div className="form-group">
             <label htmlFor="content">* Content:</label>
             <textarea
               id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              name="content"
+              value={blog.content}
+              onChange={HandleAddBlog}
             ></textarea>
           </div>
           <button type="submit">Submit</button>
