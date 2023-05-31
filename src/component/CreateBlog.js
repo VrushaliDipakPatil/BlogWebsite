@@ -30,7 +30,7 @@ const CreateBlog = () => {
         backgroundImage: image || defaultImg,
       } 
 if(submittedData.title === "" || submittedData.authorName === "" || submittedData.topic === "" || submittedData.content === " "){
-  toast.error("Fields starts with * are required.")
+  toast.error("Please fill Required fields!!")
 }else{
   parsedItem.push(submittedData)
   localStorage.setItem('blogPosts', JSON.stringify(parsedItem))

@@ -62,23 +62,35 @@
   .search-container {
     display: flex;
     align-items: center;
+    max-width: 300px;
+    margin-bottom: 20px;
   }
-  
-  .search-container input[type="text"] {
-    margin-right: 10px;
-    height:20px;
-    
+
+
+  .search-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .search-input:focus{
+    border-color: rgb(151, 92, 151);
+    outline-color:  rgb(80, 47, 80);
   }
 
   .top-heading{
     display: flex;
     justify-content: space-between;
+    color: rgb(80, 47, 80);
+    padding-top: 15px;
   }
 
   @media (max-width: 768px) {
    
     .top-heading{
-      padding-top: 5px;
+      padding-top: 20px;
      font-size: 13px;
     }
 

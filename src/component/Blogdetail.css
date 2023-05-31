@@ -4,11 +4,13 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    padding-top: 50px;
   }
   
   .blog-post h1 {
     font-size: 24px;
     margin: 0 0 10px;
+    color: rgb(80, 47, 80);
   }
   
   .author-info {

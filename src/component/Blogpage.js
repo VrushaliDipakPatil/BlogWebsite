@@ -25,7 +25,8 @@ const Blogpage = () => {
           <input
             type="text"
             id="searchInput"
-            placeholder="Search by topic or Author"
+            className="search-input"
+            placeholder="Search by Topic or Author"
             onChange={(e) => handleChange(e)}
           />
         </div>
