@@ -8,6 +8,10 @@ const Blogpage = () => {
   const handleClick = (post) => {
     navigate("/blogdetail", { state: { post } });
   };
+
+  const handleHome = (post) => {
+    navigate("/");
+  };
   const blogPost = localStorage.getItem("blogPosts");
   const parsedItem = JSON.parse(blogPost);
 
@@ -15,6 +19,12 @@ const Blogpage = () => {
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
+
+  const handleDelete=(selectedpost)=>{
+    const updatedPosts = parsedItem.filter((post) => post.title !== selectedpost.title);
+    localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+    handleHome()
+  }
 
   return (
     <div className="blog-page">
@@ -51,7 +61,10 @@ const Blogpage = () => {
               style={{ backgroundImage: `url(${post.backgroundImage})` }}
             >
               <div className="blog-content">
+                <div style={{display:"flex", justifyContent:"space-between", paddingTop:"0px", alignItems:"center"}}> 
                 <h2 className="blog-title">{post.title}</h2>
+                <p style={{color:"#ff9900", cursor:"pointer"}} onClick={()=>handleDelete(post)}><b>Delete Post</b></p>
+                </div>
                 <p className="blog-info">
                   <span className="author-name">{post.authorName}</span> |{" "}
                   <span className="topic">{post.topic}</span>

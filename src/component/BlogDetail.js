@@ -12,6 +12,7 @@ const handleBack=()=>{
 navigate('/')
 }
 
+
   return (
     <>
     <Navbar/>

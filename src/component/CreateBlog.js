@@ -3,15 +3,16 @@ import "./Createblog.css";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import blogPosts from "../blogdata";
 
 const CreateBlog = () => {
+
   const [title, setTitle] = useState("");
   const[unique, setUnique]=useState(true)
   const [authorName, setAuthorName] = useState("");
   const [topic, setTopic] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
+
 
   const defaultImg = "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg"
 
@@ -36,10 +37,10 @@ const CreateBlog = () => {
     e.preventDefault();
     istitleUnique(title)
 
-    if(unique == true){
+    if(unique === true){
     const submittedData =
       {
-        id: blogPosts.length + 1,
+        id: parsedItem.id + 1 || 1,
         title: title,
         authorName: authorName,
         topic: topic,
@@ -60,6 +61,8 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
 }}
 
   };
+
+
 
   return (
     <>
@@ -84,7 +87,7 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
             <input
               type="text"
               id="title"
-              value={title}
+              value={ title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
