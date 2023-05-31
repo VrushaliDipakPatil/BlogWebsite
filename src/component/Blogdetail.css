@@ -34,7 +34,15 @@
   }
   
   .blogcontent {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(7, 0, 0, 0.8);
     padding: 20px;
     margin-top: 200px;
+  }
+  .arrow{
+    font-size: 30px;
+  }
+
+  .arrow:hover{
+    color: rgb(153, 127, 153);
+    cursor: pointer;
   }

@@ -12,22 +12,36 @@ const Blogpage = () => {
   const blogPost = localStorage.getItem("blogPosts");
   const parsedItem = JSON.parse(blogPost);
 
-  const [searchInput, setSearchInput] = useState('')
+  const [searchInput, setSearchInput] = useState("");
   const handleChange = (e) => {
-    setSearchInput(e.target.value)
-  }
-
+    setSearchInput(e.target.value);
+  };
 
   return (
     <div className="blog-page">
       <div className="top-heading">
         <h1>Blog Posts</h1>
         <div className="search-container">
-          <input type="text" id="searchInput" placeholder="Search by topic..." onChange={(e)=>handleChange(e)}/>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by topic or Author"
+            onChange={(e) => handleChange(e)}
+          />
         </div>
       </div>
       <ul className="blog-list">
         {parsedItem
+          .filter((post) => {
+            if (searchInput === "") {
+              return post;
+            } else if (
+              post.topic.toLowerCase().includes(searchInput.toLowerCase()) ||
+              post.authorName.toLowerCase().includes(searchInput.toLowerCase())
+            ) {
+              return post;
+            }
+          })
           .slice()
           .reverse()
           .map((post) => (

@@ -74,4 +74,13 @@
     display: flex;
     justify-content: space-between;
   }
+
+  @media (max-width: 768px) {
+   
+    .top-heading{
+      padding-top: 5px;
+     font-size: 13px;
+    }
+
+  }
   

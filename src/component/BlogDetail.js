@@ -1,17 +1,22 @@
 import React from 'react';
 import "./Blogdetail.css"
-import { useLocation } from '../../node_modules/react-router-dom/dist/index';
+import { useLocation, useNavigate } from '../../node_modules/react-router-dom/dist/index';
 import Navbar from './Navbar';
 
 
 const BlogDetail = () => {
     const location = useLocation();
     const { post } = location.state;
+const navigate = useNavigate();
+const handleBack=()=>{
+navigate('/')
+}
+
   return (
     <>
     <Navbar/>
     <div className="blog-post">
-    <h1>{post?.title}</h1>
+    <h1><span className='arrow' onClick={handleBack}>&#8592;</span>{post?.title}</h1>
     <p className="author-info">
       By <span className="author-name">{post?.authorName}</span> |{' '}
       <span className="topic">{post?.topic}</span>
