@@ -1,0 +1,40 @@
+
+
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .blog-post h1 {
+    font-size: 24px;
+    margin: 0 0 10px;
+  }
+  
+  .author-info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .author-name {
+    font-weight: bold;
+  }
+  
+  .topic {
+    color: #ff9900;
+  }
+  
+  
+  .blog-item {
+    padding: 10px;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  
+  .blogcontent {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    margin-top: 200px;
+  }
