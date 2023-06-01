@@ -3,16 +3,12 @@ import "./Createblog.css";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import blogPostsdata from "./blogdata";
 
 const CreateBlog = () => {
 
-  const [title, setTitle] = useState("");
   const[unique, setUnique]=useState(true)
-  const [authorName, setAuthorName] = useState("");
-  const [topic, setTopic] = useState("");
-  const [content, setContent] = useState("");
-  const [image, setImage] = useState("");
-
+ 
   const [blog, setBlog] = useState({
     title: "",
     authorName: "",
@@ -32,7 +28,7 @@ const CreateBlog = () => {
   const defaultImg = "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg"
 
   const blogPost = localStorage.getItem('blogPosts')
-  const parsedItem = JSON.parse(blogPost) || [];
+  const parsedItem = JSON.parse(blogPost) || blogPostsdata;
 
  const istitleUnique=(inputTitle)=>{
   parsedItem

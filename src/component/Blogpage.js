@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./Blogpage.css";
 import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
+import blogPostsdata from "./blogdata";
 
 const Blogpage = () => {
   const navigate = useNavigate();
+
+  const blogpostdata = blogPostsdata;
 
   const handleClick = (post) => {
     navigate("/blogdetail", { state: { post } });
@@ -13,7 +16,7 @@ const Blogpage = () => {
     navigate("/");
   };
   const blogPost = localStorage.getItem("blogPosts");
-  const parsedItem = JSON.parse(blogPost);
+  const parsedItem = JSON.parse(blogPost) || blogpostdata;
 
   const [searchInput, setSearchInput] = useState("");
   const handleChange = (e) => {
