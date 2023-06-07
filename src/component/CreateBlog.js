@@ -109,6 +109,7 @@ const[data, setData]=useState({})
         pauseOnHover
         theme="dark"
       />
+              <div className={isOpen ? 'blur-background' : ''}>
       <div className="create-blog">
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>
@@ -173,7 +174,7 @@ const[data, setData]=useState({})
           <button type="submit">Submit</button>
         </form>
       </div>
-
+      </div>
       {isOpen && (
         <div className="model-box">
           <h2>Are you sure you want to publish??</h2>

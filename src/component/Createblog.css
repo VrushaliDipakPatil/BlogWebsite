@@ -77,6 +77,11 @@
   .model-box p {
     margin-bottom: 20px;
   }
+
+  .blur-background {
+    filter: blur(4px);
+    pointer-events: none;
+  }
   
 
   @media (max-width: 768px) {
