@@ -59,6 +59,26 @@
     background-color: rgb(151, 92, 151);
   }
 
+  .model-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .model-box h2 {
+    margin-top: 0;
+  }
+  
+  .model-box p {
+    margin-bottom: 20px;
+  }
+  
+
   @media (max-width: 768px) {
    
     .create-blog input[type='text'],

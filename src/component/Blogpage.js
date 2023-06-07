@@ -72,7 +72,7 @@ const Blogpage = () => {
                   <span className="author-name">{post.authorName}</span> |{" "}
                   <span className="topic">{post.topic}</span>
                 </p>
-                <p className="blog-text">{post.content.substring(0, 300)}</p>
+                <p className="blog-text">{post?.content?.substring(0, 300)}</p>
                 <p className="read-more-link" onClick={() => handleClick(post)}>
                   Read More
                 </p>

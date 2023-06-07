@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import "./Createblog.css";
 import Navbar from "./Navbar";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import blogPostsdata from "./blogdata";
 
 const CreateBlog = () => {
+  const [checked, setChecked] = useState("false");
 
-  const[unique, setUnique]=useState(true)
- 
   const [blog, setBlog] = useState({
     title: "",
     authorName: "",
     topic: "",
     backgroundImage: "",
-    content:" "
+    content: " ",
   });
 
   let name, value;
@@ -23,59 +22,77 @@ const CreateBlog = () => {
     value = event.target.value;
 
     setBlog({ ...blog, [name]: value });
-  }
+  };
 
-  const defaultImg = "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg"
+  const defaultImg =
+    "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg";
 
-  const blogPost = localStorage.getItem('blogPosts')
+  const blogPost = localStorage.getItem("blogPosts");
   const parsedItem = JSON.parse(blogPost) || blogPostsdata;
 
- const istitleUnique=(inputTitle)=>{
-  parsedItem
-  .filter((post) => {
-  if (
-      post.title.toLowerCase().includes(inputTitle.toLowerCase()) 
-    ){
-      toast.error("Blog Title must be Unique")
-     setUnique(false);
-    }else{
-      setUnique(false);
-    }
-  })
- }
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openModelBox = () => {
+    setIsOpen(true);
+  };
+
+  const closeModelBox = () => {
+    setIsOpen(false);
+  };
+
+const[data, setData]=useState({})
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    istitleUnique(blog.title)
-
-    if(unique === true){
-    const submittedData =
-      {
-        id: parsedItem.length + 1 ,
+    if (checked == "true") {
+      e.preventDefault();
+      const submittedData = {
+        id: parsedItem.length + 1,
         title: blog.title,
         authorName: blog.authorName,
         topic: blog.topic,
         content: blog.content,
         backgroundImage: blog.backgroundImage || defaultImg,
-      } 
-if(submittedData.title === "" || submittedData.authorName === "" || submittedData.topic === "" || submittedData.content === " "){
-  toast.error("Please fill Required fields!!")
-}else{
-  parsedItem.push(submittedData)
-  localStorage.setItem('blogPosts', JSON.stringify(parsedItem))
-  toast.success(`${submittedData.title} is added Successfully`);
-  setBlog({
-    title: "",
-    authorName: "",
-    topic: "",
-    backgroundImage: "",
-    content:" "
-  })
-}}
-
+      };
+      if (
+        submittedData.title === "" ||
+        submittedData.authorName === "" ||
+        submittedData.topic === "" ||
+        submittedData.content === " "
+      ) {
+        toast.error("Please fill Required fields!!");
+      } else {
+        openModelBox();
+        setData(submittedData);
+      }
+    } else {
+      {
+        toast.error("Please check the checkbox first !!");
+      }
+    }
   };
 
+  function AddBlog(){
+    console.log(data)
+      parsedItem.push(data)
+        localStorage.setItem('blogPosts', JSON.stringify(parsedItem))
+        toast.success(`${data.title} is added Successfully`);
+        setBlog({
+          title: "",
+          authorName: "",
+          topic: "",
+          backgroundImage: "",
+          content:" "
+        })
+  }
 
+  const handleCheckBox = (e) => {
+    if (e.target.checked == "true") {
+      setChecked("false");
+    } else {
+      setChecked("true");
+    }
+  };
 
   return (
     <>
@@ -92,7 +109,7 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
         pauseOnHover
         theme="dark"
       />
-      <div className="create-blog" >
+      <div className="create-blog">
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -101,7 +118,7 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
               type="text"
               id="title"
               name="title"
-              value={ blog.title}
+              value={blog.title}
               onChange={HandleAddBlog}
             />
           </div>
@@ -144,9 +161,35 @@ if(submittedData.title === "" || submittedData.authorName === "" || submittedDat
               onChange={HandleAddBlog}
             ></textarea>
           </div>
+          <div style={{ display: "flex" }}>
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                handleCheckBox(e);
+              }}
+            />
+            <label>Publish</label>
+          </div>
           <button type="submit">Submit</button>
         </form>
       </div>
+
+      {isOpen && (
+        <div className="model-box">
+          <h2>Are you sure you want to publish??</h2>
+          <div style={{ textAlign: "center", padding: "15px" }}>
+            <span>
+              <input type="radio" value="yes" onClick={AddBlog} />
+              
+              <label>Yes</label>
+            </span>
+            <span>
+              <input type="radio" value="no" onClick={closeModelBox} />
+              <label>No</label>
+            </span>
+          </div>
+        </div>
+      )}
     </>
   );
 };
