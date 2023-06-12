@@ -1,97 +1,70 @@
-
 .create-blog {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 50px;
+}
+
+.create-blog h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.create-blog form {
+  display: grid;
+  gap: 20px;
+}
+
+.create-blog .form-group {
+  display: grid;
+  gap: 10px;
+}
+
+.create-blog label {
+  font-weight: bold;
+}
+
+.create-blog input[type="text"],
+.create-blog textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+}
+
+.create-blog button[type="submit"] {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(80, 47, 80);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .create-blog {
+    padding: 10px;
   }
-  
+
   .create-blog h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: rgb(141, 60, 141);
+    font-size: 20px;
   }
-  
+
   .create-blog form {
     display: flex;
     flex-direction: column;
   }
-  
-  .create-blog .form-group {
-    margin-bottom: 20px;
-  }
-  
+
   .create-blog label {
-    display: block;
-    font-weight: bold;
     margin-bottom: 5px;
-    color: rgb(141, 60, 141);
   }
-  
-  .create-blog input[type='text'],
+
+  .create-blog input[type="text"],
   .create-blog textarea {
     width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    
   }
 
-  .create-blog input[type='text']:focus,
-  .create-blog textarea:focus {
-    border-color: rgb(151, 92, 151);
-    outline-color:  rgb(80, 47, 80);
+  .create-blog button[type="submit"] {
+    width: 100%;
   }
-  
-  .create-blog textarea {
-    height: 150px;
-  }
-  
-  .create-blog button[type='submit'] {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: rgb(80, 47, 80);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .create-blog button[type='submit']:hover {
-    background-color: rgb(151, 92, 151);
-  }
-
-  .model-box {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .model-box h2 {
-    margin-top: 0;
-  }
-  
-  .model-box p {
-    margin-bottom: 20px;
-  }
-
-  .blur-background {
-    filter: blur(4px);
-    pointer-events: none;
-  }
-  
-
-  @media (max-width: 768px) {
-   
-    .create-blog input[type='text'],
-    .create-blog textarea {
-      width: 95%;
-      border: 1px solid #ccc;
-    }
-
-  }
-  
-  
+}
