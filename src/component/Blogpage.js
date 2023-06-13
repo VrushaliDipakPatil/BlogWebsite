@@ -16,6 +16,9 @@ const Blogpage = () => {
     navigate("/");
   };
   const blogPost = localStorage.getItem("blogPosts");
+  const user = localStorage.getItem("bloguser");
+  const userparse = JSON.parse(user);
+  const username = userparse[0].name;
   const parsedItem = JSON.parse(blogPost) || blogpostdata;
 
   const [searchInput, setSearchInput] = useState("");
@@ -23,11 +26,13 @@ const Blogpage = () => {
     setSearchInput(e.target.value);
   };
 
-  const handleDelete=(selectedpost)=>{
-    const updatedPosts = parsedItem.filter((post) => post.title !== selectedpost.title);
-    localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
-    handleHome()
-  }
+  const handleDelete = (selectedpost) => {
+    const updatedPosts = parsedItem.filter(
+      (post) => post.title !== selectedpost.title
+    );
+    localStorage.setItem("blogPosts", JSON.stringify(updatedPosts));
+    handleHome();
+  };
 
   return (
     <div className="blog-page">
@@ -64,9 +69,21 @@ const Blogpage = () => {
               style={{ backgroundImage: `url(${post.backgroundImage})` }}
             >
               <div className="blog-content">
-                <div style={{display:"flex", justifyContent:"space-between", paddingTop:"0px", alignItems:"center"}}> 
-                <h2 className="blog-title">{post.title}</h2>
-                <p style={{color:"#ff9900", cursor:"pointer"}} onClick={()=>handleDelete(post)}><b>Delete Post</b></p>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    paddingTop: "0px",
+                    alignItems: "center",
+                  }}
+                >
+                  <h2 className="blog-title">{post.title}</h2>
+                    <p
+                      style={{ color: "#ff9900", cursor: "pointer" }}
+                      onClick={() => handleDelete(post)}
+                    >
+                    {post.authorName == username ? <b>Delete Post</b> : ""}  
+                    </p>
                 </div>
                 <p className="blog-info">
                   <span className="author-name">{post.authorName}</span> |{" "}

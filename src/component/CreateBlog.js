@@ -9,11 +9,12 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const CreateBlog = () => {
-
+  const user = localStorage.getItem("bloguser");
+  const userparse = JSON.parse(user);
+  const username = userparse[0].name;
 
   const [blog, setBlog] = useState({
     title: "",
-    authorName: "",
     topic: "",
     backgroundImage: "",
   });
@@ -45,16 +46,15 @@ const[data, setData]=useState({})
       const submittedData = {
         id: parsedItem.length + 1,
         title: blog.title,
-        authorName: blog.authorName,
+        authorName: username,
         topic: blog.topic,
-        content: contentText.trim(),
+        content: contentText,
         backgroundImage: blog.backgroundImage || defaultImg,
       };
       if (
         submittedData.title === "" ||
-        submittedData.authorName === "" ||
         submittedData.topic === "" ||
-        submittedData.content === " "
+        submittedData.content === ""
       ) {
         toast.error("Please fill Required fields!!");
       } else {
@@ -64,7 +64,6 @@ const[data, setData]=useState({})
         toast.success(`${submittedData.title} is added Successfully`);
         setBlog({
           title: "",
-          authorName: "",
           topic: "",
           backgroundImage: "",
         })
@@ -89,16 +88,6 @@ const[data, setData]=useState({})
               id="title"
               name="title"
               value={blog.title}
-              onChange={HandleAddBlog}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="authorName">* Author Name:</label>
-            <input
-              type="text"
-              name="authorName"
-              id="authorName"
-              value={blog.authorName}
               onChange={HandleAddBlog}
             />
           </div>

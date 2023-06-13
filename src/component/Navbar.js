@@ -27,10 +27,10 @@ const Navbar = () => {
     if(localStorage.getItem('bloguser')){
       setUser(JSON.parse(localStorage.getItem('bloguser')))
     }
-  })
+  },[])
 
   const handleSubmit = (e) => {
-    const bloguser={name,email}
+    const bloguser=[{name,email}]
     localStorage.setItem('bloguser', JSON.stringify(bloguser))
     setUser(localStorage.getItem('bloguser'))
 setName('')
