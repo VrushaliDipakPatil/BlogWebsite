@@ -23,6 +23,11 @@ const Navbar = () => {
   const [name, setName] = useState('');
   const [bloguser, setUser] = useState('');
 
+  useEffect(()=>{
+    if(localStorage.getItem('bloguser')){
+      setUser(JSON.parse(localStorage.getItem('bloguser')))
+    }
+  },[])
 
   const handleSubmit = (e) => {
     const bloguser=[{name,email}]

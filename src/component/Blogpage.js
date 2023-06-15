@@ -113,13 +113,13 @@ async function handleDelete(id){
                   }}
                 >
                   <h2 className="blog-title">{post.title}</h2>
-                    <p
+                    <span
                     className="delete-button"
                       style={{ color: "#ff9900", cursor: "pointer" }}
                       onClick={() => handleDelete(post._id)}
                     >
                     {post.authorName == username ? <FaTrash /> : ""}  
-                    </p>
+                    </span>
                 </div>
                 <p className="blog-info">
                   <span className="author-name">{post.authorName}</span> |{" "}
