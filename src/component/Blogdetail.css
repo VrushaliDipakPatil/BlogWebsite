@@ -17,6 +17,7 @@
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
+    position: relative;
   }
   
   .author-name {
@@ -25,6 +26,13 @@
   
   .topic {
     color: #ff9900;
+  }
+  
+  .edit-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 0;
   }
   
   
