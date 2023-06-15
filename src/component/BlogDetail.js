@@ -23,7 +23,7 @@ navigate('/')
       <span className="topic">{post?.topic}</span>
     </p>
     <div className='blog-item' style={{ backgroundImage: `url(${post?.backgroundImage})` }}></div>
-    <p className="blogcontent" >{post?.content}</p>   
+    <div dangerouslySetInnerHTML={{ __html: post?.content }} />
   </div>
   </>
   )

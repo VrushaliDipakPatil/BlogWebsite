@@ -4,6 +4,7 @@ import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const Blogpage = () => {
   const navigate = useNavigate();
 const [blogpostdata, setBlogPostData] = useState();
@@ -122,7 +123,7 @@ async function handleDelete(id){
                   <span className="author-name">{post.authorName}</span> |{" "}
                   <span className="topic">{post.topic}</span>
                 </p>
-                <p className="blog-text">{post?.content?.substring(0, 350)}</p>
+                <p className="blog-text"><div  dangerouslySetInnerHTML={{ __html: post?.content.substring(0, 350) }} /></p>
                 <p className="read-more-link" onClick={() => handleClick(post)}>
                   Read More
                 </p>

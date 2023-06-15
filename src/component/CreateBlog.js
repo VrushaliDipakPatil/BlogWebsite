@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { EditorState, RichUtils } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { convertToHTML } from 'draft-convert';
+
 
 const CreateBlog = () => {
   const user = localStorage.getItem("bloguser");
@@ -40,13 +42,13 @@ const CreateBlog = () => {
     
     e.preventDefault();
     const contentState = editorState.getCurrentContent();
-    const contentText = contentState.getPlainText();
+    const htmlContent = convertToHTML(editorState.getCurrentContent());
       const submittedData = {
         id: parsedItem.length + 1,
         title: blog.title,
         authorName: username,
         topic: blog.topic,
-        content: contentText,
+        content: htmlContent,
         backgroundImage: blog.backgroundImage || defaultImg,
       };
       if (
