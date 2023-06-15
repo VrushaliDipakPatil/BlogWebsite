@@ -3,6 +3,7 @@ import "./Blogpage.css";
 import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaTrash } from 'react-icons/fa';
 
 
 const Blogpage = () => {
@@ -113,10 +114,11 @@ async function handleDelete(id){
                 >
                   <h2 className="blog-title">{post.title}</h2>
                     <p
+                    className="delete-button"
                       style={{ color: "#ff9900", cursor: "pointer" }}
                       onClick={() => handleDelete(post._id)}
                     >
-                    {post.authorName == username ? <b>Delete Post</b> : ""}  
+                    {post.authorName == username ? <FaTrash /> : ""}  
                     </p>
                 </div>
                 <p className="blog-info">
