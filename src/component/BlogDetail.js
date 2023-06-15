@@ -22,9 +22,8 @@ navigate('/')
       By <span className="author-name">{post?.authorName}</span> |{' '}
       <span className="topic">{post?.topic}</span>
     </p>
-    <div className='blog-item' style={{ backgroundImage: `url(${post?.backgroundImage})` }}>
-    <p className="blogcontent" >{post?.content}</p>
-    </div>
+    <div className='blog-item' style={{ backgroundImage: `url(${post?.backgroundImage})` }}></div>
+    <p className="blogcontent" >{post?.content}</p>   
   </div>
   </>
   )

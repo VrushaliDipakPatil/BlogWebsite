@@ -30,16 +30,12 @@
   
   .blog-item {
     padding: 10px;
+    height: 40vh;
     background-size: cover;
     background-position: center;
     color: #fff;
   }
   
-  .blogcontent {
-    background-color: rgba(7, 0, 0, 0.8);
-    padding: 20px;
-    margin-top: 200px;
-  }
   .arrow{
     font-size: 30px;
   }

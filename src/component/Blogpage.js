@@ -1,12 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Blogpage.css";
 import { useNavigate } from "../../node_modules/react-router-dom/dist/index";
-import blogPostsdata from "./blogdata";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Blogpage = () => {
   const navigate = useNavigate();
+const [blogpostdata, setBlogPostData] = useState();
 
-  const blogpostdata = blogPostsdata;
+const fetchData = async () => {
+  try {
+    const response = await fetch('http://localhost:5000/api/blogs/getallblogs');
+
+    if (!response.ok) {
+      throw new Error('Request failed with status ' + response.status);
+    }
+
+    const responseData = await response.json();
+    setBlogPostData(responseData);
+    console.log(responseData)
+  } catch (error) {
+    console.error('Error fetching data:', error.message);
+  }
+};
+
+useEffect(() => {
+  fetchData();
+}, []);
+
+
+async function handleDelete(id){
+  await fetch(`http://localhost:5000/api/blogs/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then((res) => res.json())
+  .then((data) => {
+      console.log(data);
+      if (data === "success") {
+        toast.success("Blog Deleted Successfully");
+        fetchData()
+      }
+    })
+  .catch((err) => {
+      console.log(err);
+    });
+}
 
   const handleClick = (post) => {
     navigate("/blogdetail", { state: { post } });
@@ -15,24 +56,16 @@ const Blogpage = () => {
   const handleHome = (post) => {
     navigate("/");
   };
-  const blogPost = localStorage.getItem("blogPosts");
+
   const user = localStorage.getItem("bloguser");
   const userparse = JSON.parse(user);
   const username = userparse[0].name;
-  const parsedItem = JSON.parse(blogPost) || blogpostdata;
 
   const [searchInput, setSearchInput] = useState("");
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
-  const handleDelete = (selectedpost) => {
-    const updatedPosts = parsedItem.filter(
-      (post) => post.title !== selectedpost.title
-    );
-    localStorage.setItem("blogPosts", JSON.stringify(updatedPosts));
-    handleHome();
-  };
 
   return (
     <div className="blog-page">
@@ -49,8 +82,8 @@ const Blogpage = () => {
         </div>
       </div>
       <ul className="blog-list">
-        {parsedItem
-          .filter((post) => {
+        {blogpostdata
+          ?.filter((post) => {
             if (searchInput === "") {
               return post;
             } else if (
@@ -80,7 +113,7 @@ const Blogpage = () => {
                   <h2 className="blog-title">{post.title}</h2>
                     <p
                       style={{ color: "#ff9900", cursor: "pointer" }}
-                      onClick={() => handleDelete(post)}
+                      onClick={() => handleDelete(post._id)}
                     >
                     {post.authorName == username ? <b>Delete Post</b> : ""}  
                     </p>
@@ -89,7 +122,7 @@ const Blogpage = () => {
                   <span className="author-name">{post.authorName}</span> |{" "}
                   <span className="topic">{post.topic}</span>
                 </p>
-                <p className="blog-text">{post?.content?.substring(0, 300)}</p>
+                <p className="blog-text">{post?.content?.substring(0, 350)}</p>
                 <p className="read-more-link" onClick={() => handleClick(post)}>
                   Read More
                 </p>

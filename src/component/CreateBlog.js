@@ -3,7 +3,6 @@ import "./Createblog.css";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import blogPostsdata from "./blogdata";
 import { EditorState, RichUtils } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -34,9 +33,8 @@ const CreateBlog = () => {
     "https://y6h4c7e5.rocketcdn.me/wp-content/uploads/2019/03/personal-blog-1024x538.jpg";
 
   const blogPost = localStorage.getItem("blogPosts");
-  const parsedItem = JSON.parse(blogPost) || blogPostsdata;
+  const parsedItem = JSON.parse(blogPost) ;
 
-const[data, setData]=useState({})
 
   const handleSubmit = (e) => {
     
@@ -58,10 +56,7 @@ const[data, setData]=useState({})
       ) {
         toast.error("Please fill Required fields!!");
       } else {
-        setData(submittedData);
-        parsedItem.push(submittedData)
-        localStorage.setItem('blogPosts', JSON.stringify(parsedItem))
-        toast.success(`${submittedData.title} is added Successfully`);
+    CreateBlogData(submittedData)
         setBlog({
           title: "",
           topic: "",
@@ -71,6 +66,23 @@ const[data, setData]=useState({})
       }
   
   };
+
+  async function  CreateBlogData(blogdata){
+    await fetch("http://localhost:5000/api/blogs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(blogdata),
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      toast.success(`${data.title} is added Successfully`);
+      })
+    .catch((err) => {
+        console.log(err);
+      });
+  }
 
 
 
