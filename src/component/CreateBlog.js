@@ -44,7 +44,6 @@ const CreateBlog = () => {
     const contentState = editorState.getCurrentContent();
     const htmlContent = convertToHTML(editorState.getCurrentContent());
       const submittedData = {
-        id: parsedItem.length + 1,
         title: blog.title,
         authorName: username,
         topic: blog.topic,
