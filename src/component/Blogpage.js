@@ -20,7 +20,6 @@ const fetchData = async () => {
 
     const responseData = await response.json();
     setBlogPostData(responseData);
-    console.log(responseData)
   } catch (error) {
     console.error('Error fetching data:', error.message);
   }
@@ -59,9 +58,9 @@ async function handleDelete(id){
     navigate("/");
   };
 
-  const user = localStorage.getItem("bloguser");
-  const userparse = JSON.parse(user);
-  const username = userparse[0].name;
+  // const user = localStorage.getItem("bloguser");
+  // const userparse = JSON.parse(user);
+  // const username = userparse[0].name;
 
   const [searchInput, setSearchInput] = useState("");
   const handleChange = (e) => {
@@ -118,7 +117,7 @@ async function handleDelete(id){
                       style={{ color: "#ff9900", cursor: "pointer" }}
                       onClick={() => handleDelete(post._id)}
                     >
-                    {post.authorName == username ? <FaTrash /> : ""}  
+                    {/* {post.authorName == username ? <FaTrash /> : ""}   */}
                     </span>
                 </div>
                 <p className="blog-info">
