@@ -21,7 +21,7 @@ navigate('/')
 
 const user = localStorage.getItem("bloguser");
   const userparse = JSON.parse(user);
-  const username = userparse[0].name;
+  const username = userparse.authorName;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(post?.title);
@@ -69,7 +69,7 @@ const user = localStorage.getItem("bloguser");
   };
 
   async function  updateBlog(blogdata){
-    await fetch(`http://localhost:5000/api/blogs/${blogdata._id}`, {
+    await fetch(`https://blog-website-73p2.onrender.com/api/blogs/${blogdata._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

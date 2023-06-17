@@ -29,11 +29,7 @@ const Navbar = () => {
   const [password, setPassword] = useState('');
   const [bloguser, setUser] = useState('');
 
-  useEffect(()=>{
-    if(localStorage.getItem('bloguser')){
-      setUser(JSON.parse(localStorage.getItem('bloguser')))
-    }
-  },[])
+ 
 
 //   const handleSubmit = (e) => {
 //     const bloguser=[{name,email}]
@@ -44,12 +40,17 @@ const Navbar = () => {
 // handleCloseLogin()
 //   };
 
-async function handleSubmit(){
+// const user = localStorage.getItem("bloguser");
+// const userparse = JSON.parse(user);
+// const username = userparse.authorName;
+
+async function handleSubmit(e){
+e.preventDefault();
   const userdata = {
 authorName: name,
 password: password
   }
-  await fetch("http://localhost:5000/api/auth/login", {
+  await fetch("https://blog-website-73p2.onrender.com/api/auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,12 +59,27 @@ password: password
   })
   .then((res) => res.json())
   .then((data) => {
-    localStorage.setItem('bloguser', JSON.stringify(data))
+    if(data.authorName!==undefined){
+      localStorage.setItem('bloguser', JSON.stringify(data))
+      setUser(JSON.stringify(data))
+      setName('')
+setEmail('')
+setPassword("")
+handleCloseLogin()
+    }else{
+      toast.error(data)
+    }
     })
   .catch((err) => {
       console.log(err);
     });
 }
+
+useEffect(()=>{
+  if(localStorage.getItem('bloguser')){
+    setUser(JSON.parse(localStorage.getItem('bloguser')))
+  }
+},[])
 
   const handleCloseLogin = () => {
     setShowLogin(false);
@@ -91,7 +107,7 @@ authorName: name,
 email: email,
 password: password
   }
-  await fetch("http://localhost:5000/api/auth/register", {
+  await fetch("https://blog-website-73p2.onrender.com/api/auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -117,10 +133,7 @@ password: password
         <ul>
           <li onClick={handleHome}>Home</li>
           <li onClick={handleCreateBlog}>Create Blog</li>
-          {bloguser?
-        <li onClick={handleLogout}>LogOut</li>  :
-        <li onClick={handleUserClick}>Login</li>
-        }
+          {bloguser ? <li onClick={handleLogout}>LogOut</li>  : <li onClick={handleUserClick}>Login</li>}
           
         </ul>
       </div>
@@ -134,7 +147,7 @@ password: password
           &#x2716;
         </button>
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e)=>{handleSubmit(e)}}>
       <div className="form-group">
           <label htmlFor="name">Name:</label>
           <input

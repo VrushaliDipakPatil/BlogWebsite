@@ -12,7 +12,7 @@ import { convertToHTML } from 'draft-convert';
 const CreateBlog = () => {
   const user = localStorage.getItem("bloguser");
   const userparse = JSON.parse(user);
-  const username = userparse[0].name;
+  const username = userparse?.authorName;
 
   const [blog, setBlog] = useState({
     title: "",
@@ -69,7 +69,7 @@ const CreateBlog = () => {
   };
 
   async function  CreateBlogData(blogdata){
-    await fetch("http://localhost:5000/api/blogs", {
+    await fetch("https://blog-website-73p2.onrender.com/api/blogs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

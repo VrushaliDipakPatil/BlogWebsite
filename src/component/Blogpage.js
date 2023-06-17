@@ -12,7 +12,7 @@ const [blogpostdata, setBlogPostData] = useState();
 
 const fetchData = async () => {
   try {
-    const response = await fetch('http://localhost:5000/api/blogs/getallblogs');
+    const response = await fetch('https://blog-website-73p2.onrender.com/api/blogs/getallblogs');
 
     if (!response.ok) {
       throw new Error('Request failed with status ' + response.status);
@@ -31,7 +31,7 @@ useEffect(() => {
 
 
 async function handleDelete(id){
-  await fetch(`http://localhost:5000/api/blogs/${id}`, {
+  await fetch(`https://blog-website-73p2.onrender.com/api/blogs/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -58,9 +58,9 @@ async function handleDelete(id){
     navigate("/");
   };
 
-  // const user = localStorage.getItem("bloguser");
-  // const userparse = JSON.parse(user);
-  // const username = userparse[0].name;
+  const user = localStorage.getItem("bloguser");
+  const userparse = JSON.parse(user);
+  const username = userparse?.authorName;
 
   const [searchInput, setSearchInput] = useState("");
   const handleChange = (e) => {
@@ -117,7 +117,7 @@ async function handleDelete(id){
                       style={{ color: "#ff9900", cursor: "pointer" }}
                       onClick={() => handleDelete(post._id)}
                     >
-                    {/* {post.authorName == username ? <FaTrash /> : ""}   */}
+                    {post.authorName == username ? <FaTrash /> : ""}  
                     </span>
                 </div>
                 <p className="blog-info">
